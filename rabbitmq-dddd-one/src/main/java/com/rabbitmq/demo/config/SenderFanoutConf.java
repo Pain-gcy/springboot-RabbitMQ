@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author guochunyuan
  * @create on  2018-09-29 9:24
  */
-@Configuration
+//@Configuration
 public class SenderFanoutConf {
     @Bean(name="Amessage")
     public Queue AMessage() {

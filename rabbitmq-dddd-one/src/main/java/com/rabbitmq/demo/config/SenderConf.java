@@ -1,9 +1,6 @@
 package com.rabbitmq.demo.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,15 +9,13 @@ import org.springframework.context.annotation.Configuration;
  * @author guochunyuan
  * @create on  2018-09-29 9:15
  */
-@Configuration
+//@Configuration
 public class SenderConf {
 
     /**
      * 创建对列
      * @return
      */
-
-
     @Bean(name="message")
     public Queue queueMessage() {
         return new Queue("topic.message");
@@ -42,8 +37,16 @@ public class SenderConf {
      * @return
      */
     @Bean
-    public TopicExchange exchange() {
-        return new TopicExchange("exchange");
+    public TopicExchange exchanges() {
+        return new TopicExchange("exchanges");
+    }
+    /**
+     * 注入交换机
+     * @return
+     */
+    @Bean
+    public DirectExchange exchange() {
+        return new DirectExchange("exchange");
     }
 
     /**
@@ -53,7 +56,7 @@ public class SenderConf {
      * @return
      */
     @Bean
-    Binding bindingExchangeMessage(@Qualifier("message") Queue queueMessage, TopicExchange exchange) {
+    Binding bindingExchangeMessage(@Qualifier("message") Queue queueMessage, @Qualifier("exchange") DirectExchange exchange) {
         return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
     }
 
@@ -64,7 +67,7 @@ public class SenderConf {
      * @return
      */
     @Bean
-    Binding bindingExchangeMessages(@Qualifier("messages") Queue queueMessages, TopicExchange exchange) {
+    Binding bindingExchangeMessages(@Qualifier("message") Queue queueMessages, @Qualifier("exchanges") TopicExchange exchange) {
         return BindingBuilder.bind(queueMessages).to(exchange).with("topic.#");//*表示一个词,#表示零个或多个词
     }
 }

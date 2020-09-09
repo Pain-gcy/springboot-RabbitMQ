@@ -1,13 +1,13 @@
 package com.rabbitmq.demo.controller;
 
 import com.rabbitmq.demo.beans.User;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author guochunyuan
@@ -16,15 +16,13 @@ import java.util.Date;
 @Component
 public class SendController {
 
-    @Autowired
-    private AmqpTemplate amqpTemplate;
+    @Resource
+    private RabbitTemplate amqpTemplate;
 
 
     public String send(){
-        String content="Date:"+new Date();
+        String content="Date:"+ new Date();
         amqpTemplate.convertAndSend("gcytest1",content);
-
-
         return content;
     }
 
@@ -37,7 +35,7 @@ public class SendController {
 
 
     public void sendTopic(){
-        amqpTemplate.convertAndSend("exchange","topic.message","hello,rabbit!!!!");
+        amqpTemplate.convertAndSend("exchanges","topic.message","hello,rabbit!!!!");
     }
 
 

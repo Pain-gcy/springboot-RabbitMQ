@@ -1,0 +1,12 @@
+ ${AnsiColor.BRIGHT_YELLOW}
+   _                 __  __                                              __       _
+   FJ___      ____    LJ  LJ    ____         _    _      ____     _ ___   LJ    ___FJ
+  J  __ `.   F __ J   FJ  FJ   F __ J       FJ .. L]    F __ J   J '__ ", FJ   F __  L
+  | |--| |  | _____J J  LJ  L | |--| |     | |/  \| |  | |--| |  | |__|-JJ  L | |--| |
+  F L  J J  F L___--.J  LJ  L F L__J J     F   /\   J  F L__J J  F L  `-'J  L F L__J J
+ J__L  J__LJ\______/FJ__LJ__LJ\______/F   J\__//\\__/LJ\______/FJ__L     J__LJ\____,__L
+ |__L  J__| J______F |__||__| J______F     \__/  \__/  J______F |__L     |__| J____,__F
+
+ ${AnsiColor.BRIGHT_MAGENTA}
+
+::: Project (version:${application.version}) :::              Spring-Boot ${spring-boot.version}

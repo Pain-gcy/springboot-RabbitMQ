@@ -30,13 +30,13 @@ public class TestRabbitMQ {
     public void testRabbits() {
         helloSender.sendd();
     }
-
-    @Test
     @Ignore
+    @Test
     public void testRabbitTopic() {
         helloSender.sendTopic();
     }
 
+//    @Ignore
     @Test
     public void testRabbitFanout() {
         helloSender.sendFanout();
