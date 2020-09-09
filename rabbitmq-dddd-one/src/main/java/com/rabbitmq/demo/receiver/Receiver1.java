@@ -19,14 +19,14 @@ public class Receiver1 {
     //    ------对列接收---------
     @RabbitHandler
     @RabbitListener(queues = "gcytest1")
-    public void receiver(Message message, Channel channel) throws IOException {
+    public void receiver(String msg,Message message, Channel channel) throws IOException {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
         System.out.println("接收到的信息：" + new String(message.getBody()));
     }
 
     @RabbitHandler
     @RabbitListener(queues = "queue")
-    public void receiver1(Message message, Channel channel) throws IOException {
+    public void receiver1(String msg,Message message, Channel channel) throws IOException {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
         System.out.println("queue接收到的信息：" + new String(message.getBody()));
     }
@@ -34,14 +34,14 @@ public class Receiver1 {
     //    -------topic 接收 ----------
     @RabbitHandler
     @RabbitListener(queues = "topic.message")   //监听器监听指定的Queue
-    public void process1(Message message, Channel channel) throws IOException {
+    public void process1(String msg,Message message, Channel channel) throws IOException {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
         System.out.println("topic.message接收到的信息：" + new String(message.getBody()));
     }
 
     @RabbitHandler
     @RabbitListener(queues = "topic.messages")    //监听器监听指定的Queue
-    public void process2(Message message, Channel channel) throws IOException {
+    public void process2(String msg,Message message, Channel channel) throws IOException {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
         System.out.println("topic.messages接收到的信息：" + new String(message.getBody()));
     }
@@ -50,21 +50,21 @@ public class Receiver1 {
     //    --------fanout 接收--------
     @RabbitHandler
     @RabbitListener(queues = "fanout.A")
-    public void processA(Message message, Channel channel) throws IOException {
+    public void processA(String msg,Message message, Channel channel) throws IOException {
         System.out.println("A接收到的信息：" + new String(message.getBody()));
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
     }
 
     @RabbitHandler
     @RabbitListener(queues = "fanout.B")
-    public void processB(Message message, Channel channel) throws IOException {
+    public void processB(String msg,Message message, Channel channel) throws IOException {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
         System.out.println("B接收到的信息：" + new String(message.getBody()));
     }
 
     @RabbitHandler
     @RabbitListener(queues = "fanout.C")
-    public void processC(Message message, Channel channel) throws IOException {
+    public void processC(String msg,Message message, Channel channel) throws IOException {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
         System.out.println("C接收到的信息：" + new String(message.getBody()));
     }
